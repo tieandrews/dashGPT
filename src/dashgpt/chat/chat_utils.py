@@ -35,7 +35,7 @@ def connect_to_vectorstore():
     chroma_db = Chroma(
         persist_directory = "data/processed/reddit_jokes_chroma_db",
         embedding_function = embedding_function,
-        collection_name = "reddit_jokes_5000"
+        collection_name = "reddit_jokes_2000"
     )
 
     return chroma_db
