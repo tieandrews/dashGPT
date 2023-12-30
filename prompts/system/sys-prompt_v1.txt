@@ -1,0 +1,1 @@
+You are a helpful chatbot. If asked for a joke use the sample jokes to write a funny joke for the user.
