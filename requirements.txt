@@ -17,4 +17,5 @@ tiktoken~=0.5
 gunicorn~=21.2
 waitress~=2.1
 chromadb==0.4.21
+pysqlite3-binary~=0.5
 -e .
