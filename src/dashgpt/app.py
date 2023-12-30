@@ -4,10 +4,7 @@ import dash
 from dash import html
 import dash_bootstrap_components as dbc
 import os
-# from flask import Flask, session, redirect, url_for, render_template
-# from werkzeug.middleware.proxy_fix import ProxyFix
-# from flask import Flask, redirect, url_for
-# from flask_dance.contrib.azure import azure, make_azure_blueprint
+from flask import Flask
 from dotenv import load_dotenv, find_dotenv
 
 from dashgpt.logs import get_logger
@@ -16,10 +13,12 @@ load_dotenv(find_dotenv())
 
 logger = get_logger(__name__)
 
+flask_server = Flask(__name__)
+
 dash_app = dash.Dash(
     __name__,
     use_pages=True,
-    # server=flask_server,
+    server=flask_server,
     external_stylesheets=[
         dbc.themes.BOOTSTRAP,
         os.path.join("src", "dashgpt", "assets", "styles.css"),
@@ -72,4 +71,4 @@ dash_app._favicon = "dashgpt.ico"
 
 if __name__ == "__main__":
 
-    dash_app.run(debug=True, port=8050)
+    dash_app.run(debug=False, port=8050)
