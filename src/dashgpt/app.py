@@ -11,6 +11,8 @@ from dashgpt.logs import get_logger
 
 load_dotenv(find_dotenv())
 
+GOOGLE_ANALYTICS_TAG = os.getenv("GOOGLE_ANALYTICS_TAG", "")
+
 logger = get_logger(__name__)
 
 flask_server = Flask(__name__)
@@ -28,35 +30,36 @@ dash_app = dash.Dash(
     suppress_callback_exceptions=True,
 )
 
-# dash_app.index_string = """
-# <!DOCTYPE html>
-# <html>
-# <head>
-# <!-- Google tag (gtag.js) -->
-# <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0JFX6WWM6"></script>
-# <script>
-#   window.dataLayer = window.dataLayer || [];
-#   function gtag(){dataLayer.push(arguments);}
-#   gtag('js', new Date());
+if GOOGLE_ANALYTICS_TAG != "":
+    dash_app.index_string = ("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=""" + GOOGLE_ANALYTICS_TAG + """"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-#   gtag('config', 'G-Z0JFX6WWM6');
-# </script>
+    gtag('config', '""" + GOOGLE_ANALYTICS_TAG + """');
+    </script>
 
-# {%metas%}
-# <title>{%title%}</title>
-# {%favicon%}
-# {%css%}
-# </head>
-# <body>
-# {%app_entry%}
-# <footer>
-# {%config%}
-# {%scripts%}
-# {%renderer%}
-# </footer>
-# </body>
-# </html>
-# """
+    {%metas%}
+    <title>{%title%}</title>
+    {%favicon%}
+    {%css%}
+    </head>
+    <body>
+    {%app_entry%}
+    <footer>
+    {%config%}
+    {%scripts%}
+    {%renderer%}
+    </footer>
+    </body>
+    </html>
+    """)
 
 dash_app.layout = html.Div(
     children=[dash.page_container],
