@@ -3,14 +3,24 @@
 import os
 
 import openai
+import platform
 from dotenv import load_dotenv, find_dotenv
-from langchain.vectorstores import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.schema import Document
 import re
 
 from dashgpt.logs import get_logger
 from dashgpt.data.langchain_utils import count_tokens
+
+# for eployment on azure, Chroma SQlite version is out oof date, over write
+# inspired from: https://gist.github.com/defulmere/8b9695e415a44271061cc8e272f3c300
+if platform.system() == "Linux":
+    # these three lines swap the stdlib sqlite3 lib with the pysqlite3 package
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+from langchain.vectorstores import Chroma
 
 logger = get_logger(__name__)
 
