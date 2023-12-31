@@ -2,11 +2,17 @@
 
 # DashGPT
 
-DashGPT is a user-friendly chat interface for OpenAI's GPT models. It's built with Plotly Dash and provides a seamless experience on both desktop and mobile platforms. The application supports:
-- retrieval-augmented generation capabilities
-- user feedback functionality
-- custom user settings and user guides
-- text streaming functionality
+DashGPT is a template for user-friendly chat interfaces for LLM chat models. It's built with Plotly Dash and provides a seamless experience on both desktop and mobile platforms. This template is setup to use OpenAI's API's but can be adapted to use other LLM's. 
+
+This template supports:  
+✨ Retrieval-augmented generation   
+💁 User feedback functionality  
+⚙️ Custom user settings and user guides  
+📡 Text streaming functionality  
+📱 Optimized for mobile and desktop  
+
+**Demo Site: https://dashgpt.live**
+![DashGPT Demo](src/dashgpt/assets/images/dashgpt-demo_v1.gif)
 
 ## Quick Start
 
@@ -18,6 +24,12 @@ DashGPT is a user-friendly chat interface for OpenAI's GPT models. It's built wi
 6. Got to `http://localhost:8050/` in your browser to use it! 
 
 # How it works
+
+## Retrieval Augmented Generation
+
+This repository includes a ChromDB vector database with a sample of 2000 Reddit Jokes embedded. When a question is asked the top 3 most similar jokes to the question are retrieved and used as the context for the LLM. The LLM then generates a response to the question.
+
+In the response the similar jokes are provided in a drop-down accordion element to show how you might display sources of information to the user.
 
 ## Plotly Dash Text Streaming
 
@@ -35,6 +47,12 @@ From his README on how the text streaming works:
     3. JS function processess the response and starts appending incoming text to the `innerHTML` of the `response window element`
 
 There is also a second clientside callback which disables the submit button so that it can not be pressed while the request is being processed.
+
+## Retrieval Augmented Generation: Reddit Jokes
+
+To demonstrate the incorporation of retrieval-augmented generation, we use the Reddit Jokes dataset. The dataset is available here: https://github.com/taivop/joke-dataset/blob/master/reddit_jokes.json
+
+The dataset is loaded into a ChromaDB vector database for local prototyping and demo purposes. You can switch out the Vector DB fairly easily.
 
 ## Running the DashGPT App
 
@@ -70,7 +88,7 @@ If you encounter any issues or have questions, please open an issue.
 
 # License
 
-This project is licensed under the Creative Commons Attribution-NonCommercial-Sharealike 4.0 license. See the [LICENSE](LICENSE) file for more details or here: [https://creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+This project is licensed under the Creative Commons Attribution-Sharealike 4.0 license. See the [LICENSE](LICENSE) file for more details or here: [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Acknowledgments
 
